@@ -34,12 +34,24 @@ class App extends Component {
    this.setState({ todos: todos });
  }
 
+deleteTodo(index) {
+  // const todos = this.state.todos;
+  // const todo = todos[index];
+  console.log('clicked delete' + index);
+
+  //what am I missing here? Either my .filter syntax is incorrect, or am I missing a bind somewhere for the deleteTodo function?
+  this.setState({ todos: this.state.todos.filter(todo => todo !== index) });
+        // this.setState(prevState => ({
+        //   todos: prevState.todos.filter(todo => todo !== index )
+        // }));
+}
+
   render() {
     return (
       <div className="App">
          <ul>
           { this.state.todos.map( (todo, index) =>
-          <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+          <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(index) }/>
         )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
